@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties PUBLIC "-//JTRS//DTD SCA V2.2.2 PRF//EN" "properties.dtd">
+<properties>
+  <simple id="DCE:cdc5ee18-7ceb-4ae6-bf4c-31f983179b4d" mode="readonly" name="device_kind" type="string">
+    <description>This specifies the device kind</description>
+    <value>FRONTEND</value>
+    <kind kindtype="configure"/>
+    <kind kindtype="allocation"/>
+    <action type="eq"/>
+  </simple>
+  <simple id="DCE:0f99b2e4-9903-4631-9846-ff349d18ecfb" mode="readonly" name="device_model" type="string">
+    <description> This specifies the specific device</description>
+    <value>RTL2832</value>
+    <kind kindtype="configure"/>
+    <kind kindtype="allocation"/>
+    <action type="eq"/>
+  </simple>
+  <struct id="FRONTEND::tuner_allocation" mode="readwrite" name="tuner_allocation">
+    <description>FRONTEND Interfaces tuner allocation structure</description>
+    <simple id="FRONTEND::tuner_allocation::tuner_type" mode="readwrite" name="tuner_type" type="string">
+      <description>NOTE: RX_DIGITIZER is the only tuner_type supported ast this time.</description>
+      <value></value>
+      <kind kindtype="configure"/>
+      <action type="external"/>
+    </simple>
+    <simple id="FRONTEND::tuner_allocation::allocation_id" name="allocation_id" type="string">
+      <value></value>
+    </simple>
+    <simple id="FRONTEND::tuner_allocation::center_frequency" name="center_frequency" type="double">
+      <value>0.0</value>
+      <units>Hz</units>
+    </simple>
+    <simple id="FRONTEND::tuner_allocation::bandwidth" name="bandwidth" type="double">
+      <value>150000.0</value>
+      <units>Hz</units>
+    </simple>
+    <simple id="FRONTEND::tuner_allocation::bandwidth_tolerance" name="bandwidth_tolerance" type="double">
+      <value>5.0</value>
+      <units>Percent</units>
+    </simple>
+    <simple id="FRONTEND::tuner_allocation::sample_rate" name="sample_rate" type="double">
+      <value>256E3</value>
+      <units>Hz</units>
+    </simple>
+    <simple id="FRONTEND::tuner_allocation::sample_rate_tolerance" name="sample_rate_tolerance" type="double">
+      <value>5.0</value>
+      <units>Percent</units>
+    </simple>
+    <simple id="FRONTEND::tuner_allocation::device_control" name="device_control" type="boolean">
+      <description>True - allocator desires control, False - allocator is a listener.</description>
+      <value>false</value>
+    </simple>
+    <simple id="FRONTEND::tuner_allocation::group_id" name="group_id" type="string">
+      <description>Must be allocated to match group_id_global</description>
+      <value></value>
+    </simple>
+    <simple id="FRONTEND::tuner_allocation::rf_flow_id" name="rf_flow_id" type="string">
+      <description>ID to associate with the stream, empty makes the stream match all devices.</description>
+      <value></value>
+    </simple>
+    <simple id="rtl_device::allocation::frequency_correction" mode="readwrite" name="frequency_correction" type="long">
+      <value>0</value>
+      <units>PPM</units>
+      <kind kindtype="configure"/>
+      <action type="external"/>
+    </simple>
+    <simple id="rtl_device::allocation::agc_mode" mode="readwrite" name="agc_mode" type="long">
+      <description>Digital Automatic Gain Control (AGC) Enablel/Disable.  Enabling may increase background noise.</description>
+      <value>0</value>
+      <enumerations>
+        <enumeration label="Enabled" value="1"/>
+        <enumeration label="Disabled" value="0"/>
+      </enumerations>
+      <kind kindtype="configure"/>
+      <kind kindtype="event"/>
+      <action type="external"/>
+    </simple>
+    <simple id="rtl_device::allocation::tuner_gain" name="tuner_gain" type="long">
+      <value>0</value>
+      <units>dB</units>
+    </simple>
+    <configurationkind kindtype="allocation"/>
+  </struct>
+  <struct id="FRONTEND::listener_allocation" mode="readwrite" name="listener_allocation">
+    <description>parameters for an allocator opting to listen-only.</description>
+    <simple id="FRONTEND::listener_allocation::existing_allocation_id" name="existing_allocation_id" type="string">
+      <value></value>
+    </simple>
+    <simple id="FRONTEND::listener_allocation::listener_allocation_id" name="listener_allocation_id" type="string">
+      <value></value>
+    </simple>
+    <configurationkind kindtype="allocation"/>
+  </struct>
+  <structsequence id="tuner_statuses" mode="readonly" name="tuner_statuses">
+    <struct id="FRONTEND::tuner_status" mode="readwrite" name="tuner_status">
+      <simple id="FRONTEND::tuner_status::tuner_type" name="tuner_type" type="string">
+        <value></value>
+      </simple>
+      <simple id="FRONTEND::tuner_status::allocation_id_csv" name="allocation_id_csv" type="string">
+        <description>CSV list of allocation IDs both controllers and listeners</description>
+        <value></value>
+      </simple>
+      <simple id="FRONTEND::tuner_status::center_frequency" name="center_frequency" type="double">
+        <value>0</value>
+        <units>Hz</units>
+      </simple>
+      <simple id="FRONTEND::tuner_status::bandwidth" name="bandwidth" type="double">
+        <value>150000</value>
+        <units>Hz</units>
+      </simple>
+      <simple id="FRONTEND::tuner_status::sample_rate" name="sample_rate" type="double">
+        <value>256e3</value>
+        <units>Hz</units>
+      </simple>
+      <simple id="FRONTEND::tuner_status::group_id" name="group_id" type="string">
+        <description>Unique ID specifying group of device -- must match group_id_global</description>
+        <value></value>
+      </simple>
+      <simple id="FRONTEND::tuner_status::rf_flow_id" name="rf_flow_id" type="string">
+        <value></value>
+      </simple>
+      <simple id="rtl_device::gain_mode" mode="readwrite" name="gain_mode" type="long">
+        <description>Gain Mode: Manual is required to use tuner_gain and if_gain.  Otherwise those properties are ignored in Automatic mode.</description>
+        <value>1</value>
+        <enumerations>
+          <enumeration label="Automatic" value="0"/>
+          <enumeration label="Manual" value="1"/>
+        </enumerations>
+        <kind kindtype="configure"/>
+        <kind kindtype="event"/>
+        <action type="external"/>
+      </simple>
+      <simple id="rtl_device::agc_mode" mode="readwrite" name="agc_mode" type="long">
+        <description>Digital Automatic Gain Control (AGC) Enablel/Disable.  Enabling may increase background noise.</description>
+        <value>0</value>
+        <enumerations>
+          <enumeration label="Enabled" value="1"/>
+          <enumeration label="Disabled" value="0"/>
+        </enumerations>
+        <kind kindtype="configure"/>
+        <kind kindtype="event"/>
+        <action type="external"/>
+      </simple>
+      <simple id="rtl_device::tuner_gain" mode="readwrite" name="tuner_gain" type="long">
+        <description>Gain in tenths of dB.  115 --> 11.5 dB</description>
+        <value>-1</value>
+        <units>tenths of dB</units>
+        <kind kindtype="configure"/>
+        <kind kindtype="event"/>
+        <action type="external"/>
+      </simple>
+      <simple id="rtl_device::status::offset_tuning" mode="readwrite" name="offset_tuning" type="boolean">
+        <description>Enable or disable offset tuning for zero-IF tuners, which allows to avoid problems caused by the DC offset of the ADCs and 1/f noise.</description>
+        <value>false</value>
+        <kind kindtype="configure"/>
+        <action type="external"/>
+      </simple>
+      <simple id="rtl_device::status::frequency_correction" mode="readwrite" name="frequency_correction" type="long">
+        <description>Frequency Correction</description>
+        <value>0</value>
+        <units>PPM</units>
+        <kind kindtype="configure"/>
+        <action type="external"/>
+      </simple>
+      <simple id="rtl_device::status::direct_sampling" mode="readwrite" name="direct_sampling" type="long">
+        <description>Enable or disable the direct sampling mode. When enabled, the IF mode of the RTL2832 is activated, center_frequency controls the IF-frequency of the DDC, which can be used to tune from 0 to 28.8 MHz.</description>
+        <value>0</value>
+        <enumerations>
+          <enumeration label="Disabled" value="0"/>
+          <enumeration label="I_ADC" value="1"/>
+          <enumeration label="Q_ADC" value="2"/>
+        </enumerations>
+        <kind kindtype="configure"/>
+        <action type="external"/>
+      </simple>
+      <simple id="rtl_device::status::device_name" mode="readwrite" name="device_name" type="string">
+        <description>Name returned by RTL  through the library</description>
+        <value></value>
+        <kind kindtype="configure"/>
+        <action type="external"/>
+      </simple>
+      <simple id="rtl_device::status::device_serial" mode="readwrite" name="device_serial" type="string">
+        <description>Detected serial number of the RTL.</description>
+        <value></value>
+        <kind kindtype="configure"/>
+        <action type="external"/>
+      </simple>
+      <simple id="FRONTEND::tuner_status::enabled" name="enabled" type="boolean">
+        <value>true</value>
+      </simple>
+      <configurationkind kindtype="configure"/>
+    </struct>
+    <configurationkind kindtype="configure"/>
+  </structsequence>
+  <simple id="group_id_global" mode="readwrite" type="string">
+    <value>rtls</value>
+    <kind kindtype="execparam"/>
+    <action type="external"/>
+  </simple>
+</properties>

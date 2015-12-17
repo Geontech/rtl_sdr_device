@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE softpkg PUBLIC "-//JTRS//DTD SCA V2.2.2 SPD//EN" "softpkg.dtd">
+<softpkg id="DCE:65c2fb18-b0e3-4a11-aa14-1284a1f6dbc7" name="rtl_sdr_device" type="sca_compliant">
+  <title></title>
+  <author>
+    <name>null</name>
+  </author>
+  <description>*** NOTE *** omniORB.cfg giopMaxMsgSize should be adjusted, if necessary, based on the required buffer_num, buffer_size, and sample_rate of a Device like this one.  If you get &quot;pushPacket failed&quot; it's typically related to a CORBA::MARSHAL exception pertaining to this field.</description>
+  <propertyfile type="PRF">
+    <localfile name="rtl_sdr_device.prf.xml"/>
+  </propertyfile>
+  <descriptor>
+    <localfile name="rtl_sdr_device.scd.xml"/>
+  </descriptor>
+  <implementation id="cpp">
+    <description>Redhawk SDR Device implementation of the Osmocom.org RTL-SDR driver</description>
+    <code type="Executable">
+      <localfile name="cpp/rtl_sdr_device"/>
+      <entrypoint>cpp/rtl_sdr_device</entrypoint>
+    </code>
+    <compiler name="/usr/bin/gcc" version="4.1.2"/>
+    <programminglanguage name="C++"/>
+    <humanlanguage name="EN"/>
+    <os name="Linux"/>
+  </implementation>
+</softpkg>
