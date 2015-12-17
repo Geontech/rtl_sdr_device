@@ -1,0 +1,10 @@
+f36a39b8e06fe610def618ce9dda566f main.cpp
+01e1ab21a1b60bf4424e4a2db81d1422 rtl_sdr_device_base.cpp
+7c809860fe6e1ed9d21c311631986d13 reconf
+79ce6ef53c79f069bcf2d5bf1c8a41ff rtl_sdr_device_base.h
+b6a1ef8b3688fa79c1f34663466b0839 configure.ac
+8a00a10d1e07c76684863250dfae6adc Makefile.am
+c7e3546626457d81b320fcb7545388c5 struct_props.h
+7426332578265cfb0f6a798225123df0 port_impl.cpp
+2edeb4570ba55b42155b992f38587fb6 build.sh
+c9cd273babbfbc6ba421e84ee032f3c9 port_impl.h

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties PUBLIC "-//JTRS//DTD SCA V2.2.2 PRF//EN" "properties.dtd">
+<properties>
+  <simple id="DCE:cdc5ee18-7ceb-4ae6-bf4c-31f983179b4d" mode="readonly" name="device_kind" type="string">
+    <description>This specifies the device kind</description>
+    <value>receiver</value>
+    <kind kindtype="configure"/>
+    <kind kindtype="allocation"/>
+    <action type="eq"/>
+  </simple>
+  <simple id="DCE:0f99b2e4-9903-4631-9846-ff349d18ecfb" mode="readonly" name="device_model" type="string">
+    <description> This specifies the specific device</description>
+    <value>RTL2832</value>
+    <kind kindtype="configure"/>
+    <kind kindtype="allocation"/>
+    <action type="eq"/>
+  </simple>
+  <simple id="center_frequency" mode="readwrite" type="ulong">
+    <description>Center Frequency</description>
+    <value>10000000</value>
+    <units>Hz</units>
+    <kind kindtype="configure"/>
+    <kind kindtype="event"/>
+    <action type="external"/>
+  </simple>
+  <simple id="frequency_correction" mode="readwrite" type="long">
+    <description>Frequency Correction</description>
+    <value>0</value>
+    <units>PPM</units>
+    <kind kindtype="configure"/>
+    <kind kindtype="event"/>
+    <action type="external"/>
+  </simple>
+  <simple id="tuner_gain" mode="readwrite" type="long">
+    <description>Gain in tenths of dB.  115 --> 11.5 dB</description>
+    <value>0</value>
+    <units>tenths of dB</units>
+    <kind kindtype="configure"/>
+    <kind kindtype="event"/>
+    <action type="external"/>
+  </simple>
+  <simple id="gain_mode" mode="readwrite" type="long">
+    <description>Gain Mode: Manual is required to use tuner_gain and if_gain.  Otherwise those properties are ignored in Automatic mode.</description>
+    <value>1</value>
+    <enumerations>
+      <enumeration label="Automatic" value="0"/>
+      <enumeration label="Manual" value="1"/>
+    </enumerations>
+    <kind kindtype="configure"/>
+    <kind kindtype="event"/>
+    <action type="external"/>
+  </simple>
+  <simple id="sample_rate" mode="readwrite" type="ulong">
+    <description>Baseband sample rate</description>
+    <value>256000</value>
+    <units>Hz</units>
+    <kind kindtype="configure"/>
+    <kind kindtype="event"/>
+    <action type="external"/>
+  </simple>
+  <simple id="agc_mode" mode="readwrite" type="long">
+    <description>Digital Automatic Gain Control (AGC) Enablel/Disable.  Enabling may increase background noise.</description>
+    <value>0</value>
+    <enumerations>
+      <enumeration label="Enabled" value="1"/>
+      <enumeration label="Disabled" value="0"/>
+    </enumerations>
+    <kind kindtype="configure"/>
+    <kind kindtype="event"/>
+    <action type="external"/>
+  </simple>
+  <simple id="direct_sampling" mode="readwrite" type="long">
+    <description>Enable or disable the direct sampling mode. When enabled, the IF mode of the RTL2832 is activated, center_frequency controls the IF-frequency of the DDC, which can be used to tune from 0 to 28.8 MHz.</description>
+    <value>0</value>
+    <enumerations>
+      <enumeration label="Disabled" value="0"/>
+      <enumeration label="I_ADC" value="1"/>
+      <enumeration label="Q_ADC" value="2"/>
+    </enumerations>
+    <kind kindtype="configure"/>
+    <kind kindtype="event"/>
+    <action type="external"/>
+  </simple>
+  <simple id="offset_tuning" mode="readwrite" type="boolean">
+    <description>Enable or disable offset tuning for zero-IF tuners, which allows to avoid problems caused by the DC offset of the ADCs and 1/f noise.</description>
+    <value>false</value>
+    <kind kindtype="configure"/>
+    <kind kindtype="event"/>
+    <action type="external"/>
+  </simple>
+  <simple id="device_index" mode="readwrite" type="ulong">
+    <description>Device index in the USB chain.</description>
+    <value>0</value>
+    <kind kindtype="execparam"/>
+    <action type="external"/>
+  </simple>
+  <simplesequence id="if_gains" mode="readwrite" type="long">
+    <description>Intermediate frequency gains for E4000</description>
+    <values>
+      <value>0</value>
+      <value>0</value>
+      <value>0</value>
+      <value>0</value>
+      <value>0</value>
+      <value>0</value>
+    </values>
+    <kind kindtype="configure"/>
+    <kind kindtype="event"/>
+    <action type="external"/>
+  </simplesequence>
+  <simple id="buffer_size" mode="readwrite" type="ulong">
+    <description>Size of buffers to use when streaming from the RTL device.  Buffer_size * buffer_num must be evenly divisible by 512.</description>
+    <value>65536</value>
+    <units>Bytes</units>
+    <range max="65536" min="1"/>
+    <kind kindtype="configure"/>
+    <kind kindtype="event"/>
+    <action type="external"/>
+  </simple>
+  <simple id="stream_id" mode="readwrite" type="string">
+    <description>Stream ID to uniquely identify this RTL-SDR USB Device's stream.</description>
+    <value>rtl_sdr_1</value>
+    <kind kindtype="configure"/>
+    <kind kindtype="event"/>
+    <action type="external"/>
+  </simple>
+  <simple id="buffer_num" mode="readwrite" type="ulong">
+    <description>Number of buffers of buffer_size to utilize.  Buffer_size * buffer_num must be evenly divisible by 512.</description>
+    <value>8</value>
+    <range max="20" min="1"/>
+    <kind kindtype="configure"/>
+    <kind kindtype="event"/>
+    <action type="external"/>
+  </simple>
+  <struct id="switch_pattern" mode="readwrite">
+    <simple id="value" mode="readwrite" type="long">
+      <description>Switching pattern's value (0-4).</description>
+      <kind kindtype="message"/>
+      <action type="external"/>
+    </simple>
+    <configurationkind kindtype="message"/>
+  </struct>
+  <simple id="reserve" mode="readwrite" type="boolean">
+    <description>Serves as a &quot;handle&quot; for allocation to ensure only one Waveform can allocate the RTL's port.</description>
+    <value>false</value>
+    <kind kindtype="allocation"/>
+    <action type="external"/>
+  </simple>
+</properties>
